@@ -242,11 +242,11 @@ def create_attack_config(hps, dataset):
     norm_eps = {}
     norm_stepsizes = {}
 
-    if dataset in ['cifar10', 'cifar100']:
+    if dataset in ['cifar10', 'cifar100', 'mnist']:
         norm_eps['linf'] = 8 / 255
-        norm_eps['l2']  = 0.5
-        norm_eps['l1']  = 12
-        norm_eps['l1.5']  = 6
+        norm_eps['l2'] = 0.5
+        norm_eps['l1'] = 12
+        norm_eps['l1.5'] = 6
 
         norm_stepsizes['linf'] = 2 / 255
         norm_stepsizes['l2'] = 0.1

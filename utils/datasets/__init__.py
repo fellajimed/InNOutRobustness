@@ -1,3 +1,4 @@
+from .mnist import MNIST
 from .cifar import get_CIFAR10, get_CIFAR100, get_CIFAR10_1
 from .semisupervised_dataset import get_CIFAR10_ti_500k
 from .svhn import get_SVHN

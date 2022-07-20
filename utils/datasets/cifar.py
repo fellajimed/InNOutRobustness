@@ -2,12 +2,12 @@ import torch
 import torch.distributions
 from torchvision import datasets, transforms
 from torchvision.datasets.vision import VisionDataset
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import Dataset
 
 from .augmentations.cifar_augmentation import get_cifar10_augmentation
 from .preproc import Gray
 import numpy as np
-#from .auto_augmen_old import AutoAugment
+# from .auto_augmen_old import AutoAugment
 from .paths import get_CIFAR10_path, get_CIFAR100_path, get_base_data_dir
 from PIL import Image
 import pickle
