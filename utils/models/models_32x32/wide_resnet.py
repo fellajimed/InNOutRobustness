@@ -81,7 +81,6 @@ class WideResNet(nn.Module):
                  dropRate=0.0, return_feature_map=False, is_rgb=True):
         super(WideResNet, self).__init__()
         self.return_feature_map = return_feature_map
-        # FIXME: to be adapted for images with one channel
         nChannels = [16, 16*widen_factor, 32*widen_factor, 64*widen_factor]
         assert((depth - 4) % 6 == 0)
         n = (depth - 4) / 6
@@ -103,6 +102,8 @@ class WideResNet(nn.Module):
         self.activation = get_activation(activation)
         self.fc = nn.Linear(nChannels[3], num_classes)
         self.nChannels = nChannels[3]
+        # 8 for cifar, 7 for mnist
+        self.avg_pool2d_ker_size = 7 + int(is_rgb)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -120,7 +121,7 @@ class WideResNet(nn.Module):
         out = self.block2(out)
         out = self.block3(out)
         out = self.activation(self.bn1(out))
-        out = F.avg_pool2d(out, 8)
+        out = F.avg_pool2d(out, self.avg_pool2d_ker_size)
         out = out.view(-1, self.nChannels)
 
         if self.return_feature_map:
