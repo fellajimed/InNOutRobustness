@@ -31,7 +31,7 @@ def MNIST(train=True, batch_size=None, augm_flag=True, shuffle=None):
     path = get_mnist_path()
     dataset = datasets.MNIST(path, train=train, transform=transform)
     # only for debug: reduce training dataset
-    dataset = torch.utils.data.Subset(dataset, list(range(100)))
+    # dataset = torch.utils.data.Subset(dataset, list(range(100)))
 
     loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
                                          shuffle=shuffle, num_workers=4)
