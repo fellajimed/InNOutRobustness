@@ -13,6 +13,11 @@ def get_mnist_path():
     # return os.path.join(get_base_data_dir(), 'MNIST')
 
 
+def get_fashionmnist_path():
+    path = Path(__file__).resolve().parents[4]
+    return path / 'data'
+
+
 def get_svhn_path():
     return os.path.join(get_base_data_dir(), 'SVHN')
 

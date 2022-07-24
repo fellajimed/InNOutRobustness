@@ -70,31 +70,13 @@ od_bs = int(hps.od_bs_factor * hps.bs)
 id_config = {}
 train_loader = dl.MNIST(train=True, batch_size=hps.bs, augm_flag=True)
 
-od_config = {}
-loader_config = {'ID config': id_config, 'OD config': od_config}
-
 if hps.train_type.lower() in ['ceda', 'acet', 'advacet',
                               'tradesacet', 'tradesceda']:
-    # FIXME: for debug only
-    # download datasets and test these cases
-    # for now, only `plain` train type is tested
-    tiny_train = train_loader
+    # using fashion-mnist
+    tiny_train = dl.FMNIST(train=True, batch_size=hps.bs, augm_flag=True)
 
-    if hps.od_dataset == 'tinyImages':
-        tiny_train = dl.get_80MTinyImages(batch_size=od_bs, augm_type=hps.augm,
-                                          num_workers=1, size=img_size,
-                                          exclude_cifar=hps.exclude_cifar,
-                                          exclude_cifar10_1=hps.exclude_cifar,
-                                          config_dict=od_config)
-    elif hps.od_dataset == 'cifar100':
-        tiny_train = dl.get_CIFAR100(train=True, batch_size=od_bs,
-                                     shuffle=True, augm_type=hps.augm,
-                                     size=img_size, config_dict=od_config)
-    elif hps.od_dataset == 'openImages':
-        tiny_train = dl.get_openImages('train', batch_size=od_bs, shuffle=True,
-                                       augm_type=hps.augm, size=img_size,
-                                       exclude_dataset=None,
-                                       config_dict=od_config)
+    od_config = {}
+    loader_config = {'ID config': id_config, 'OD config': od_config}
 else:
     loader_config = {'ID config': id_config}
 
